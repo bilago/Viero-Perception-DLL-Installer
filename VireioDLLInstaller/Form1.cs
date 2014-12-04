@@ -104,6 +104,7 @@ namespace VireioDLLInstaller
             folderBrowserDialog1.Description = "Choose the Root directory of the Games you want to play";
             folderBrowserDialog1.SelectedPath = System.IO.Path.Combine(getSteamPath(), steamAppPath);
             listBox1.SelectionMode = SelectionMode.MultiExtended;
+            listBox1.Items.Add("Press Browse Directory to begin.");
         }
 
         private void Form1_Shown(object sender, EventArgs e)
@@ -112,6 +113,7 @@ namespace VireioDLLInstaller
             browseForGame();
         }
 
+        //use this to select the directory to scan
         private void browseForGame()
         {
             button1.Enabled = false;
@@ -150,7 +152,7 @@ namespace VireioDLLInstaller
             return false;
         }
 
-
+        //button1 installs symlinks
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -169,6 +171,12 @@ namespace VireioDLLInstaller
             }
         }
 
+        /// <summary>
+        /// This method will parse the correct file names and create the symlinks in the selected games directory
+        /// </summary>
+        /// <param name="item">full path of game</param>
+        /// <param name="install">is this an install or uninstall? true=install</param>
+        /// <returns>true = success false = fail</returns>
         private bool workwithFiles(string item, bool install)
         {
             string[] files;           
@@ -249,6 +257,7 @@ namespace VireioDLLInstaller
             return true;
         }
 
+        //this is the uninstall button
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -268,14 +277,72 @@ namespace VireioDLLInstaller
             }
         }
 
+        //Lets the user select another game
         private void button3_Click(object sender, EventArgs e)
         {
             browseForGame();
         }
 
-       
 
+        //Would be nice to have the ability to scan the entire hard drive for supported games, but it will take some time
+        //This button and below code is disabled and not accessible by the user
+        private void button4_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            scanEntirePC = new System.Threading.Thread(scanPCforGames);
+            scanEntirePC.IsBackground = true;
+            scanEntirePC.Start();
+            while (scanEntirePC.IsAlive)
+            {
+                Application.DoEvents();
+                label2.Text = currentFile;
+                System.Threading.Thread.Sleep(200);
+            }
 
+          
+        }
+        public System.Threading.Thread scanEntirePC;
+        public List<string> games = new List<string>();
+        public string currentFile;
+        private void scanPCforGames()
+        {            
+            foreach (DriveInfo drives in System.IO.DriveInfo.GetDrives())
+            {
+                if (drives.IsReady)
+                {
+                    foreach (string directory in Directory.GetDirectories(drives.RootDirectory.ToString(),"*",SearchOption.AllDirectories))
+                    {
+                        try
+                        {
+
+                            foreach (string filePath in Directory.GetFiles(directory, "*.exe", SearchOption.AllDirectories))
+                            {
+                                currentFile = filePath;
+                                //checking to see if game is on the supported list
+                                if (isGameSupported(Path.GetFileName(filePath)))
+                                    games.Add(filePath);
+                            }
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
+            }
+
+            
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            while (scanEntirePC.IsAlive)
+            {
+                scanEntirePC.Interrupt();
+                scanEntirePC.Abort();
+                System.Threading.Thread.Sleep(100);
+            }
+        }
+        //====================================================================================
     }
 }
 

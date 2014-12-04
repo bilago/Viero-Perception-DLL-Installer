@@ -1,4 +1,9 @@
-﻿using System;
+﻿//Written by Bilago
+//Open source code
+//
+//
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;

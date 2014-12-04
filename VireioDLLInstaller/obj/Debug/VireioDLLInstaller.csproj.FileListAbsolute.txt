@@ -6,3 +6,11 @@ C:\VireioDLLInstaller\VireioDLLInstaller\bin\Debug\VireioDLLInstaller.exe
 C:\VireioDLLInstaller\VireioDLLInstaller\bin\Debug\VireioDLLInstaller.pdb
 C:\VireioDLLInstaller\VireioDLLInstaller\obj\Debug\VireioDLLInstaller.exe
 C:\VireioDLLInstaller\VireioDLLInstaller\obj\Debug\VireioDLLInstaller.pdb
+C:\Viero-Perception-DLL-Installer\VireioDLLInstaller\obj\Debug\VireioDLLInstaller.exe
+C:\Viero-Perception-DLL-Installer\VireioDLLInstaller\obj\Debug\VireioDLLInstaller.pdb
+C:\Viero-Perception-DLL-Installer\VireioDLLInstaller\bin\Debug\VireioDLLInstaller.exe
+C:\Viero-Perception-DLL-Installer\VireioDLLInstaller\bin\Debug\VireioDLLInstaller.pdb
+C:\Viero-Perception-DLL-Installer\VireioDLLInstaller\obj\Debug\VireioDLLInstaller.csprojResolveAssemblyReference.cache
+C:\Viero-Perception-DLL-Installer\VireioDLLInstaller\obj\Debug\VireioDLLInstaller.Form1.resources
+C:\Viero-Perception-DLL-Installer\VireioDLLInstaller\obj\Debug\VireioDLLInstaller.Properties.Resources.resources
+C:\Viero-Perception-DLL-Installer\VireioDLLInstaller\obj\Debug\VireioDLLInstaller.csproj.GenerateResource.Cache
